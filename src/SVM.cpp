@@ -6,6 +6,7 @@ SVM::SVM(){
     this->rom.fill(0);
     this->rom_pointer = 0;
     this->ram_pointer = 0;
+    this->acc = 0;
 }
 
 void SVM::reset_pc(){
