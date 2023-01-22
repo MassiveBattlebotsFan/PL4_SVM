@@ -13,9 +13,9 @@
 
 ## Commands
 
-Syntax: [command] [arg]
-- ld [var | $] - load [var | $] into acc
-- sv [var | $] - load acc into [var | $]
+Syntax: `[command]` `[arg]`
+- ld `[var | $]` - load `[var | $]` into acc
+- sv `[var | $]` - load acc into `[var | $]`
 - sa `[byte]` - load `[byte]` into acc
 - ra `[word]` - increment RAM pointer by `[word]`
 - pc `[word]` - increment ROM pointer by `[word]`
