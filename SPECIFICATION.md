@@ -14,8 +14,8 @@
 ## Commands
 
 Syntax: [command] [arg]
-- ld [var | $] - load [var | $] into acc
-- sv [var | $] - load acc into [var | $]
+- ld [var | \$] - load [var | \$] into acc
+- sv [var | \$] - load acc into [var | \$]
 - sa [byte] - load [byte] into acc
 - ra [word] - increment RAM pointer by [word]
 - pc [word] - increment ROM pointer by [word]
@@ -25,5 +25,5 @@ Syntax: [command] [arg]
 - an [!byte] - and acc by [!byte]
 - xr [!byte] - xor acc by [!byte]
 - cp [!byte] - skip next instruction if acc == [!byte]
-- in [@ | var | $] - read 1 byte from input to [@ | var | $]
-- wr [@ | var | $] - write 1 byte from [@ | var | $] to output
+- in [@ | var | \$] - read 1 byte from input to [@ | var | \$]
+- wr [@ | var | \$] - write 1 byte from [@ | var | \$] to output
