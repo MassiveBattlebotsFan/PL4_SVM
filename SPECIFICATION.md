@@ -16,17 +16,29 @@
 
 ## Commands
 
+Each command uses a total of 4 bytes, where `[command]` = 2 bytes, `[arg]` = 2 bytes.    
 Syntax: `[command] [arg]`
-- `ld [var | $]` - load `[var | $]` into acc
+- `sd [var | $]` - load `[var | $]` into acc
 - `sv [var | $]` - load acc into `[var | $]`
 - `sa [byte]` - load `[byte]` into acc
-- `ra [word]` - increment RAM pointer by `[word]`
-- `pc [word]` - increment ROM pointer by `[word]`
+- `ia [byte]` - increment RAM pointer by `[byte]`
+- `io [byte]` - increment ROM pointer by `[byte]`. Note: because instructions are 4 bytes, `[byte]`%4 should equal 0.
+- `da [byte]` - decrement RAM pointer by `[byte]`
+- `do [byte]` - decrement ROM pointer by `[byte]`. Note: because instructions are 4 bytes, `[byte]`%4 should equal 0.
 - `ad [byte]` - add `[byte]` to acc
-- `or [!byte]` - or acc by `[!byte]`
-- `nt [null]` - not acc
-- `an [!byte]` - and acc by `[!byte]`
-- `xr [!byte]` - xor acc by `[!byte]`
-- `cp [!byte]` - skip next instruction if acc == `[!byte]`
-- `in [@ | var | $]` - read 1 byte from input to `[@ | var | $]`
-- `wr [@ | var | $]` - write 1 byte from `[@ | var | $]` to output
+- `as [byte]` - sub `[byte]` from acc
+- `aa [byte]` - arithmetic right shift acc by `[byte]`
+- `ar [byte]` - logical right shift acc by `[byte]`
+- `al [byte]` - left shift acc by `[byte]`
+- `lo [!byte]` - or acc by `[!byte]`
+- `ln [null]` - not acc
+- `la [!byte]` - and acc by `[!byte]`
+- `lx [!byte]` - xor acc by `[!byte]`
+- `lc [!byte]` - skip next instruction if acc == `[!byte]`
+- `wi [@ | var | $]` - read 1 byte from input to `[@ | var | $]`
+- `wo [@ | var | $]` - write 1 byte from `[@ | var | $]` to output
+- `vd [var | $]` - add `[var | $]` to acc
+- `vs [var | $]` - sub `[var | $]` from acc
+- `va [var | $]` - arithmetic right shift acc by `[var | $]`
+- `vr [var | $]` - logical right shift acc by `[var | $]`
+- `vl [var | $]` - left shift acc by `[var | $]`

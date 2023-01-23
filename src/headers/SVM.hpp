@@ -1,6 +1,7 @@
 #ifndef SVM_H
 #define SVM_H
 
+#include <iostream>
 #include <vector>
 #include <array>
 #include <string>
@@ -14,8 +15,12 @@ private:
 public:
     std::array<uint8_t, 0xFFFF> ram;
     std::array<uint8_t, 0xFFFF> rom;
+    void reset();
+    void exec();
+    uint16_t get_rom_ptr();
+    void set_rom_ptr(uint16_t val);
+    uint16_t inc_rom_ptr(uint16_t val);
     SVM();
-    void reset_pc();
 };
 
 #endif
