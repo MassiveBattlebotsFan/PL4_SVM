@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(PL4_SVM VERSION 0.0.1)
-set(PROJECT_VERSION_TWEAK \"alpha\") #used as build branch
+project(PL4_SVM VERSION 0.0.2)
+set(PROJECT_VERSION_TWEAK \"proto\") #used as build branch
 
 option(DEBUG "Build with debug messages" off)
 set(CMAKE_CXX_STANDARD 20)
