@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(PL4_SVM VERSION 0.0.2)
+project(PL4_SVM VERSION 0.0.3)
 set(PROJECT_VERSION_TWEAK \"proto\") #used as build branch
 
 option(DEBUG "Build with debug messages" off)

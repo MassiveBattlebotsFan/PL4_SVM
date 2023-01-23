@@ -17,108 +17,99 @@ void SVM::exec(){
     #define AROM (this->rom[this->rom_pointer])
     #define ARAM (this->ram[this->ram_pointer])
     this->rom_pointer = 0;
+    uint8_t cmd[3] = {0,0,0};
+    uint16_t arg16 = 0;
+    uint8_t arg8 = 0;
     while(AROM != 0){
+        cmd[0] = AROM;
+        this->rom_pointer++;
+        cmd[1] = AROM;
+        this->rom_pointer++;
+        arg16 = 0;
+        arg16 = (AROM)<<8;
+        this->rom_pointer++;
+        arg16 |= AROM;
+        arg8 = AROM;
         #ifdef DEBUG
-        std::clog << this->rom_pointer << " : " << AROM << '\n';
+        std::clog << (this->rom_pointer+1)/4 << ',' << cmd << " : " << (int)arg8 << ',' << arg16 << '\n';
         #endif
-        if(AROM == 's'){
-            this->rom_pointer++;
-            if(AROM == 'd'){
-                this->rom_pointer++;
-                if(AROM == '$'){
+        if(cmd[0] == 's'){
+            if(cmd[1] == 'd'){
+                if(arg8 == '$'){
                     this->acc = ARAM;
                 }else{
-                    this->acc = this->varspace[AROM];
+                    this->acc = this->varspace[arg8];
                 }
-            }else if(AROM == 'a'){
-                this->rom_pointer++;
-                this->acc = AROM;
-            }else if(AROM == 'v'){
-                this->rom_pointer++;
-                if(AROM == '$'){
+            }else if(cmd[1] == 'a'){
+                this->acc = arg8;
+            }else if(cmd[1] == 'v'){
+                if(arg8 == '$'){
                     ARAM = this->acc;
                 }else{
-                    this->varspace[AROM] = this->acc;
+                    this->varspace[arg8] = this->acc;
                 }
             }
-        }else if(AROM == 'i'){
-            this->rom_pointer++;
-            if(AROM == 'a'){
-                this->rom_pointer++;
-                this->ram_pointer += AROM;
-            }else if(AROM == 'o'){
-                this->rom_pointer++;
-                this->rom_pointer += 1 + AROM*4;
+        }else if(cmd[0] == 'i'){
+            if(cmd[1] == 'a'){
+                this->ram_pointer += arg16;
+            }else if(cmd[1] == 'o'){
+                this->rom_pointer += (arg16*4)-4;
             }
-        }else if(AROM == 'd'){
-            this->rom_pointer++;
-            if(AROM == 'a'){
-                this->rom_pointer++;
-                this->ram_pointer -= AROM;
-            }else if(AROM == 'o'){
-                this->rom_pointer++;
-                this->rom_pointer -= 1 + AROM*4;
+        }else if(cmd[0] == 'd'){
+            if(cmd[1] == 'a'){
+                this->ram_pointer -= arg16;
+            }else if(cmd[1] == 'o'){
+                this->rom_pointer -= (arg16*4)+4;
             }
-        }else if(AROM == 'a'){
-            this->rom_pointer++;
-            if(AROM == 'd'){
-                this->rom_pointer++;
-                this->acc += AROM;
-            }else if(AROM == 's'){
-                this->rom_pointer++;
-                this->acc -= AROM;
+        }else if(cmd[0] == 'a'){
+            if(cmd[1] == 'd'){
+                this->acc += arg8;
+            }else if(cmd[1] == 's'){
+                this->acc -= arg8;
             }
-        }else if(AROM == 'v'){
-            this->rom_pointer++;
-            if(AROM == 'd'){
-                this->rom_pointer++;
+        }else if(cmd[0] == 'v'){
+            if(cmd[1] == 'd'){
                 if(AROM == '$'){
                     this->acc += ARAM;
                 }else{
-                    this->acc += this->varspace[AROM];
+                    this->acc += this->varspace[arg8];
                 }
-            }else if(AROM == 's'){
-                this->rom_pointer++;
+            }else if(cmd[1] == 's'){
                 if(AROM == '$'){
                     this->acc -= ARAM;
                 }else{
-                    this->acc -= this->varspace[AROM];
+                    this->acc -= this->varspace[arg8];
                 }
             }
-        }else if(AROM == 'l'){
-            this->rom_pointer++;
-            if(AROM == 'c'){
-                this->rom_pointer++;
-                if(this->acc == AROM){
+        }else if(cmd[0] == 'l'){
+            if(cmd[1] == 'c'){
+                if(this->acc == arg8){
                     this->rom_pointer+=4;
                 }
             }
-        }else if(AROM == 'w'){
-            this->rom_pointer++;
-            if(AROM == 'i'){
-                this->rom_pointer++;
-                if(AROM == '@'){
+        }else if(cmd[0] == 'w'){
+            if(cmd[1] == 'i'){
+                if(arg8 == '@'){
                     this->acc = getchar();
-                }else if(AROM == '$'){
+                }else if(arg8 == '$'){
                     ARAM = getchar();
                 }else{
-                    this->varspace[AROM] = getchar();
+                    this->varspace[arg8] = getchar();
                 }
-            }else if(AROM == 'o'){
-                this->rom_pointer++;
-                if(AROM == '@'){
+            }else if(cmd[1] == 'o'){
+                if(arg8 == '@'){
                     std::cout << this->acc;
-                }else if(AROM == '$'){
+                }else if(arg8 == '$'){
                     std::cout << ARAM;
                 }else{
-                    std::cout << this->varspace[AROM];
+                    std::cout << this->varspace[arg8];
                 }
             }
         }
         #ifdef DEBUG
         std::clog << "acc: " << (int)this->acc << '\n';
         #endif
-        while(this->rom_pointer % 4 != 0) this->rom_pointer++;
+        this->rom_pointer++;
     }
     #undef AROM
     #undef ARAM

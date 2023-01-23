@@ -10,4 +10,4 @@ sd 0
 as 1
 sv 0
 lc 0
-do 9
+do 8

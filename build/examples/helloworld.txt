@@ -19,4 +19,4 @@ wo $
 ia 1
 as 1
 lc 0
-do 5
+do 4
