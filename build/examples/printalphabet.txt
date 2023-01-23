@@ -1,0 +1,13 @@
+sa 26
+sv 0
+sa 64
+sv 1
+sd 1
+ad 1
+sv 1
+wo @
+sd 0
+as 1
+sv 0
+lc 0
+do 9
