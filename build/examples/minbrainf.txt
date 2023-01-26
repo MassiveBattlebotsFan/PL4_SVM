@@ -117,14 +117,14 @@ lc 0
 jo 56
 ja 0xe000 ;jump to current position in program
 sd 1
-lc 0 ;decrement until 0, line 64
+lc 0 ;decrement until 0
 io 4
 io 12
 ia 0x0100
 as 1
 do 24
 sd 2
-lc 0 ;decrement until 0, line 92
+lc 0 ;decrement until 0
 io 4
 io 12
 ia 0x01
@@ -155,14 +155,14 @@ io 4
 jo 56
 ja 0xe000 ;jump to current position in program
 sd 1
-lc 0 ;decrement until 0, line 64
+lc 0 ;decrement until 0
 io 4
 io 12
 ia 0x0100
 as 1
 do 24
 sd 2
-lc 0 ;decrement until 0, line 92
+lc 0 ;decrement until 0
 io 4
 io 12
 ia 0x01
