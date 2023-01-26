@@ -1,0 +1,194 @@
+BrainF*ck on PL4 SVM but it's badly implemented...
+
+Uhh... BrainlessF*ck?
+
+Special commands:
+# - exits interpreter
+$ - ends input stream
+
+So to exit run #$
+
+var0 = ';'/character buf
+var1 = high part of ram pointer
+var2 = low part of ram pointer
+var3 = high part of prog pointer
+var4 = low part of prog pointer
+
+Code starts here:
+sa 59 ;line 0
+sv 0
+sa 0xe0 ;line 8
+sv 1
+sa 0
+sv 2
+ja 0xe000 ;jump to a free space in ram
+sd 0
+wo @
+wi @ ;line 36
+sv $
+ia 1
+lc 36 ;check if newline
+jo 36 ;if not read next char
+ja 0xe000 ;line 56
+sd 1 ;line 60
+lc 0 ;decrement until 0, line 64
+io 4
+io 12
+ia 0x0100
+as 1
+do 24
+sd 2
+lc 0 ;decrement until 0, line 92
+io 4
+io 12
+ia 0x01
+as 1
+do 24
+sd 2
+ad 1
+sv 2
+lc 0
+io 12
+sd 1
+ad 1
+sv 1
+sd $
+sv 0
+ja 0 ;line 156
+sd 3 ;line 160
+lc 0 ;decrement until 0, line 164
+io 4
+io 12
+ia 0x0100
+as 1
+do 24
+sd 4
+lc 0 ;decrement until 0, line 192
+io 4
+io 12
+ia 0x01
+as 1
+do 24
+sd 0
+lc 60 ;<
+io 40
+da 1
+sd 4
+as 1
+sv 4
+lc 0xff
+io 12
+sd 3
+as 1
+sv 3
+jo 56
+lc 62 ;>
+io 40
+ia 1
+sd 4
+ad 1
+sv 4
+lc 0x0
+io 12
+sd 3
+ad 1
+sv 3
+jo 56
+lc 43 ;+
+io 16
+sd $
+ad 1
+sv $
+jo 56
+lc 45 ;-
+io 16
+sd $
+as 1
+sv $
+jo 56
+lc 46 ;.
+io 8
+wo $
+jo 56
+lc 91 ;[
+io 140
+sd $
+lc 0
+jo 56
+ja 0xe000 ;jump to current position in program
+sd 1
+lc 0 ;decrement until 0, line 64
+io 4
+io 12
+ia 0x0100
+as 1
+do 24
+sd 2
+lc 0 ;decrement until 0, line 92
+io 4
+io 12
+ia 0x01
+as 1
+do 24
+sd $
+lc 36
+io 4
+jo 0
+lc 93 ;]
+io 4
+jo 56
+ia 1 ;increment ram by one, increment stored values
+sd 2
+ad 1
+sv 2
+lc 0
+io 12
+sd 1
+ad 1
+sv 1
+do 64
+lc 93 ;] but functionality this time
+io 144 ;placeholder
+sd $
+lc 0
+io 4
+jo 56
+ja 0xe000 ;jump to current position in program
+sd 1
+lc 0 ;decrement until 0, line 64
+io 4
+io 12
+ia 0x0100
+as 1
+do 24
+sd 2
+lc 0 ;decrement until 0, line 92
+io 4
+io 12
+ia 0x01
+as 1
+do 24
+da 1 ;decrement ram by one, decrement stored values
+sd $
+lc 0
+io 4
+jo 56
+lc 91 ;[
+io 4
+jo 56
+sd 2
+as 1
+sv 2
+lc 0xff
+io 12
+sd 1
+as 1
+sv 1
+do 68
+lc 35
+io 4
+io 12
+lc 36
+jo 56
+jo 0
+wi @
