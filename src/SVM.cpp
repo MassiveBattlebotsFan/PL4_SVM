@@ -16,6 +16,13 @@ void SVM::reset(){
 SVM::SVM(){
 }
 
+void SVM::clrmem(){
+    this->ram_pointer = 0;
+    this->ram.fill(0);
+    this->acc = 0;
+    this->varspace.fill(0);
+}
+
 void SVM::runcmd(uint8_t cmd[3], uint8_t arg8, uint16_t arg16){
     if(cmd[0] == 's'){
         if(cmd[1] == 'd'){

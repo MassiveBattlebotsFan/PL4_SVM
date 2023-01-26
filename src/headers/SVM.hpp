@@ -16,6 +16,7 @@ public:
     std::array<uint8_t, 0xFFFF> ram;
     std::array<uint8_t, 0xFFFF> rom;
     void reset();
+    void clrmem();
     void exec();
     void runcmd(uint8_t cmd[3], uint8_t arg8, uint16_t arg16);
     uint16_t get_rom_ptr();

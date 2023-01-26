@@ -21,6 +21,16 @@ int main(){
         for(int i = 0; i < 256; i++) buffer[i] = 0;
         std::cout << std::hex << std::setfill('0') << std::setw(4) << svm.get_rom_ptr() << "> ";
         getline(std::cin, buffer);
+        if(strcmp(buffer.c_str(), "help") == 0){
+            std::cout << "Commands:\
+            \nhelp - this message \
+            \nexit - quit monitor \
+            \nexec - runs ROM starting at 0x0000 \
+            \nreset - resets everything to clean state \
+            \nclrmem - clears varspace and RAM \
+            \ndump - prints ROM in an easy-to-copy format\n";
+            continue;
+        }
         if(strcmp(buffer.c_str(), "exec") == 0){
             svm.exec();
             std::cout << '\n';
@@ -28,6 +38,10 @@ int main(){
         }
         if(strcmp(buffer.c_str(), "reset") == 0){
             svm.reset();
+            continue;
+        }
+        if(strcmp(buffer.c_str(), "clrmem") == 0){
+            svm.clrmem();
             continue;
         }
         if(strcmp(buffer.c_str(), "dump") == 0){

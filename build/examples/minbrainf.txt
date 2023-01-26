@@ -29,16 +29,17 @@ sv $
 ia 1
 lc 36 ;check if newline
 jo 36 ;if not read next char
-ja 0xe000 ;line 56
-sd 1 ;line 60
-lc 0 ;decrement until 0, line 64
+wi @
+ja 0xe000 ;line 60
+sd 1
+lc 0 ;decrement until 0, line 68
 io 4
 io 12
 ia 0x0100
 as 1
 do 24
 sd 2
-lc 0 ;decrement until 0, line 92
+lc 0 ;decrement until 0, line 96
 io 4
 io 12
 ia 0x01
@@ -81,7 +82,7 @@ io 12
 sd 3
 as 1
 sv 3
-jo 56
+jo 60
 lc 62 ;>
 io 40
 ia 1
@@ -93,28 +94,32 @@ io 12
 sd 3
 ad 1
 sv 3
-jo 56
+jo 60
 lc 43 ;+
 io 16
 sd $
 ad 1
 sv $
-jo 56
+jo 60
 lc 45 ;-
 io 16
 sd $
 as 1
 sv $
-jo 56
+jo 60
 lc 46 ;.
 io 8
 wo $
-jo 56
+jo 60
+lc 44 ;,
+io 8
+wi $
+jo 60
 lc 91 ;[
 io 140
 sd $
 lc 0
-jo 56
+jo 60
 ja 0xe000 ;jump to current position in program
 sd 1
 lc 0 ;decrement until 0
@@ -136,7 +141,7 @@ io 4
 jo 0
 lc 93 ;]
 io 4
-jo 56
+jo 60
 ia 1 ;increment ram by one, increment stored values
 sd 2
 ad 1
@@ -146,13 +151,13 @@ io 12
 sd 1
 ad 1
 sv 1
-do 64
+do 68
 lc 93 ;] but functionality this time
 io 144 ;placeholder
 sd $
 lc 0
 io 4
-jo 56
+jo 60
 ja 0xe000 ;jump to current position in program
 sd 1
 lc 0 ;decrement until 0
@@ -172,10 +177,10 @@ da 1 ;decrement ram by one, decrement stored values
 sd $
 lc 0
 io 4
-jo 56
+jo 60
 lc 91 ;[
 io 4
-jo 56
+jo 60
 sd 2
 as 1
 sv 2
@@ -189,6 +194,5 @@ lc 35
 io 4
 io 12
 lc 36
-jo 56
+jo 60
 jo 0
-wi @
