@@ -30,8 +30,27 @@ int main(){
             svm.reset();
             continue;
         }
+        if(strcmp(buffer.c_str(), "dump") == 0){
+            for(int i = 0; i < 0xFFFF; i+=4){
+                if(svm.rom[i] == 0x0) break;
+                tmp = svm.rom[i+2] << 8;
+                tmp |= svm.rom[i+3];
+                std::cout << svm.rom[i] << svm.rom[i+1] << ' ';
+                if(tmp == '@') std::cout << '@';
+                else if(tmp == '$') std::cout << '$';
+                else std::cout << "0x" << tmp;
+                std::cout << '\n';
+            }
+            continue;
+        }
         if(buffer.length() < 2){
             std::cerr << "cmd below minlen\n";
+            continue;
+        }
+        if(buffer[0] == '$'){
+            tmp = static_cast<uint16_t>(std::strtol(&buffer[3], NULL, 0));
+            uint8_t tmpcmdbuf[3] = {static_cast<uint8_t>(buffer[1]), static_cast<uint8_t>(buffer[2]), 0};
+            svm.runcmd(tmpcmdbuf, tmp&0b11111111, tmp);
             continue;
         }
         svm.rom[svm.inc_rom_ptr(1)] = buffer[0];

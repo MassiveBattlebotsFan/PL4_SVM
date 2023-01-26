@@ -21,8 +21,12 @@ Syntax: `[command] [arg]`
 - `sa [byte]` - load `[byte]` into acc
 - `ia [word]` - increment RAM pointer by `[word]`
 - `io [word]` - increment ROM pointer by `[word]`
+- `ir [@ | var]` - increment ROM pointer by `[@ | var]`
 - `da [word]` - decrement RAM pointer by `[word]`
 - `do [word]` - decrement ROM pointer by `[word]`
+- `dr [@ | var]` - decrement ROM pointer by `[@ | var]`
+- `ja [word]` - set RAM pointer to `[word]`
+- `jo [word]` - set ROM pointer to `[word]`
 - `ad [byte]` - add `[byte]` to acc
 - `as [byte]` - sub `[byte]` from acc
 - `aa [byte]` - arithmetic right shift acc by `[byte]`
